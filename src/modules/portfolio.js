@@ -29,11 +29,6 @@ const portfolio = () => {
                     }
                 }
             });
-            [...popupSlider.children].forEach((elem, index) => {
-            if (elem.style.display === 'block') {
-                slideNumber = index;
-            }
-        });
         }
     });
     popup.addEventListener('click', (event) => {

@@ -11,6 +11,7 @@ import consultation from './modules/consultation';
 import reviews from './modules/reviews';
 import faq from './modules/faq';
 import tBody from './modules/tBody';
+import sendForm from './modules/sendForm';
 //номер телефона в header
 numberOpacity();
 
@@ -46,3 +47,6 @@ faq();
 
 //инфо для repairTypes
 tBody();
+
+//отправка формы
+sendForm();
