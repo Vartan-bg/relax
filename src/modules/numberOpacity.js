@@ -5,10 +5,12 @@ const numberOpacity = () => {
         arrow = arrowWrapper.querySelector('img');
 
     arrowWrapper.addEventListener('click', () => {
+        //если номер скрыт - показать его
         if (+getComputedStyle(number).opacity === 0) {
             number.style.margin = '25px 0 0 0';
             number.style.opacity = 1;
             arrow.style.cssText = `transform: rotate(180deg)`;
+            //в ином случае - скрыть
         } else {
             number.style.margin = '0';
             number.style.opacity = 0;

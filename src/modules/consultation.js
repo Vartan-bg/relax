@@ -1,15 +1,15 @@
 const consultation = () => {
-    const main = document.querySelector('.director'),
+    const body = document.querySelector('body'),
         consultButton = main.querySelector('button'),
         popupConsult = document.querySelector('.popup-consultation');
-    
-    main.addEventListener('click', (event) => {
+    //открытие окна консультации
+    body.addEventListener('click', (event) => {
         let target = event.target;
         if (target === consultButton) {
             popupConsult.style.visibility = 'visible';
         }
     });
-
+    //закрытие окна консультации
     popupConsult.addEventListener('click', (event) => {
         let target = event.target;
         if(target.closest('.close-consultation')){

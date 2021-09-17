@@ -1,6 +1,6 @@
 const phoneMask = () => { 
   const input = document.querySelectorAll('input');
-  
+  //маска номера телефона для всех инпутов
     input.forEach(item => {
         if (item.getAttribute('name') === 'phone') {
             let keyCode;
