@@ -59,9 +59,7 @@ const repairTypes = () => {
             }
                 deleteTextNodes(smallSlider);
                 sliderCountTotal.textContent = smallSlider.firstChild.childNodes.length;
-                if (count > smallSlider.firstChild.childNodes.length) {
-                    count = 1;
-                }
+                count = 1;
                 sliderCountCurrent.textContent = count;
             
         } else if (target.closest('.slider-arrow_right')) {

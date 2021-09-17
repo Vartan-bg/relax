@@ -6,7 +6,6 @@ const sendForm = () => {
         event.preventDefault();
         let target = event.target;
         if (target.tagName === 'FORM') {
-            console.log(1);
 
             const formData = new FormData(target);
             let body = {};
@@ -36,7 +35,8 @@ const sendForm = () => {
             });
 
             if (error === 0) {
-                postData(body)
+                (async ()=> {
+                    await postData(body)
                     .then((response) => {
                         if (response.status !== 200) {
                             throw new Error('status network not 200');
@@ -50,6 +50,11 @@ const sendForm = () => {
                             }
                         });
                     });
+                    target.reset();
+
+                })();
+                
+                
             }
         }
     });
