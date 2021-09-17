@@ -7,7 +7,9 @@ const modal = document.getElementById('modal'),
     addBtn = document.querySelector('.btn-addItem'),
     closeBtn = document.querySelector('.button__close'),
     cancelBtn = document.querySelector('.cancel-button'),
-    bodyWrap = document.querySelector('body');
+    bodyWrap = document.querySelector('body'),
+    typeSelect = document.getElementById('typeItem'),
+    tbody = document.getElementById('tbody');
 
 // редирект на страницу авторизации если куки пустые
 const redirect = () => {
@@ -28,8 +30,6 @@ const getDataTypes = (data) => {
 };
 
 const showData = (data, typeArr) => {
-    const typeSelect = document.getElementById('typeItem'),
-        tbody = document.getElementById('tbody');
         
     tbody.innerHTML = '';
 
@@ -84,11 +84,14 @@ const showData = (data, typeArr) => {
         data.forEach(item => {
             if (item.type === typeSelect.value) tbodyLayout(item);
         });
+        if (typeSelect.value === 'Все услуги') printTable();
     });
 };
 
 //отображение данных на странице
 const printTable = () => {
+    typeSelect.innerHTML = `<option value = 'Все услуги'>Все услуги</doption>`;
+
     getData()
         .then(resolve => resolve.json())
         .then(data => {
@@ -146,6 +149,7 @@ const changeData = (id, body) => {
 //обработчик события на изменение или удаление элемента в базе данных
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+    let target = event.target;
     let body = {};
     inputs.forEach((item) => {
         if (item.id === 'type') body.type = item.value;
@@ -160,6 +164,16 @@ form.addEventListener('submit', (event) => {
         (async () => {
             await postData(body)
                 .then((response) => {
+                    if (response.status == 422) {
+                        validationError = document.createElement('div');
+                        validationError.classList = 'error';
+                        validationError.textContent = 'Введите корректные данные. Тип услуги - буквы, вид работ - буквы, ед.измерения - буквы и(или) цифры, цена - цирфы';
+                        target.prepend(validationError);
+                        throw new Error('Введите корректные данные');
+                    }
+                    if (target.children[0].classList.contains('error')) {
+                        target.children[0].remove();
+                    }
                     inputs.forEach(input => input.value = '');
                 })
                 .catch((err) => console.error(err));
@@ -169,7 +183,21 @@ form.addEventListener('submit', (event) => {
     } else if (modalHeader.textContent === 'Изменение услуги') {
         //вызов функции изменения
         (async () => {
-            await changeData(id, body).catch((err) => console.error(err));
+            await changeData(id, body)
+                .then((response) => {
+                    if (response.status == 422) {
+                        validationError = document.createElement('div');
+                        validationError.classList = 'error';
+                        validationError.textContent = 'Введите корректные данные. Тип услуги - буквы, вид работ - буквы, ед.измерения - буквы и(или) цифры, цена - цирфы';
+                        target.prepend(validationError);
+                        throw new Error('Введите корректные данные');
+                    }
+                    if (target.children[0].classList.contains('error')) {
+                        target.children[0].remove();
+                    }
+                    inputs.forEach(input => input.value = '');
+                })
+                .catch((err) => console.error(err));
 
             printTable();
         })();
