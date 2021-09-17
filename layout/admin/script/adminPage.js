@@ -42,7 +42,7 @@ const showData = (data, typeArr) => {
 
     // верстка таблицы 
     const tbodyLayout = (item) => {
-        let units = item.units.replace(/\d/g, (a)=> `<sup>${a}</sup>`)
+        let units = item.units.replace(/\d/g, (a) => `<sup>${a}</sup>`);
         tbody.insertAdjacentHTML('beforeend', `
         <tr class="table__row">
           <td class="table__id table__cell">${item.id}</td>
