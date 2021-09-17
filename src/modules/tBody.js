@@ -8,7 +8,7 @@ const tBody = () => {
     navList.innerHTML = '';
     const getData = async () => {
     // путь к запросу
-    const data = await fetch('../crm-backend/db.json');
+    const data = await fetch('http://localhost:3000/api/items');
         if (data.ok) {
             return data.json();
         } else {
