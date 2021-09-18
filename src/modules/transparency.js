@@ -4,7 +4,7 @@ const transparency = () => {
         slider = sliderWrap.querySelector('.transparency-slider'),
         popupSlider = document.querySelector('.popup-transparency-slider'),
         sliderPopupCount = document.getElementById('transparency-popup-counter');
-    let width = document.documentElement.clientWidth;;
+    let width = document.documentElement.clientWidth;
 
     window.addEventListener('resize', () => {
         width = document.documentElement.clientWidth;
