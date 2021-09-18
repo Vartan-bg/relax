@@ -4,7 +4,22 @@ const openMenu = () => {
         popupMenu = document.querySelector('.popup-menu'),
         popupTypes = document.querySelector('.popup-repair-types'),
         privacy = document.querySelector('.popup-privacy');
-
+    
+    if (document.documentElement.clientWidth > 576) {
+        menu.style.cssText += 'transform: translate3d(645px, 0, 0)';
+    } else {
+        menu.style.cssText += 'transform: translate3d(0, -2000px, 0)';
+    }
+    let width = document.documentElement.clientWidth;
+    //изменение расположения меню в зависимости от ширины экрана
+    window.addEventListener('resize', () => {
+        width = document.documentElement.clientWidth;
+        if (width > 576) {
+            menu.style.cssText += 'transform: translate3d(645px, 0, 0)';
+        } else {
+            menu.style.cssText += 'transform: translate3d(0, -2000px, 0)';
+        }
+    });
     
     const toggleMenu = () => {
         //если меню закрыто - открыть
@@ -12,24 +27,16 @@ const openMenu = () => {
             menu.style.transition = '1s';
             popupMenu.style.visibility = 'visible';
             menu.style.visibility = 'visible';
-            //если разрешение больше 576px - меню выплывает справа
-            if (document.documentElement.clientWidth > 576) {
-                menu.style.cssText += 'transform: translate3d(645px, 0, 0)';
-                menu.style.cssText += 'transform: translate3d(0, 0, 0)';
-                //иначе выплывает сверху
-            } else {
-                menu.style.cssText += 'transform: translate3d(0, -2000px, 0)';
-                menu.style.cssText += 'transform: translate3d(0, 0, 0)';
-            }
+            //всплытие окна
+            menu.style.cssText += 'transform: translate3d(0, 0, 0)';
+
             //если меню открыто - закрыть
         } else if (popupMenu.style.visibility === 'visible'){
             popupMenu.style.visibility = 'hidden';
             menu.style.position = 'absolute';
-            if (document.documentElement.clientWidth > 576) {
-                menu.style.cssText += 'transform: translate3d(0, 0, 0)';
+            if (width > 576) {
                 menu.style.cssText += 'transform: translate3d(645px, 0, 0)';
             } else {
-                menu.style.cssText += 'transform: translate3d(0, 0, 0)';
                 menu.style.cssText += 'transform: translate3d(0, -2000px, 0)';
             }
         }
