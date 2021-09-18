@@ -1,11 +1,11 @@
 const consultation = () => {
     const body = document.querySelector('body'),
-        consultButton = main.querySelector('button'),
+        consultButton = body.querySelector('button'),
         popupConsult = document.querySelector('.popup-consultation');
     //открытие окна консультации
     body.addEventListener('click', (event) => {
         let target = event.target;
-        if (target === consultButton) {
+        if (target.textContent === 'Проконсультироваться') {
             popupConsult.style.visibility = 'visible';
         }
     });
